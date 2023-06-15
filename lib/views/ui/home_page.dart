@@ -1,9 +1,14 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/models/sneakersModel.dart';
 import 'package:flutter_shop/services/helper.dart';
 import 'package:flutter_shop/views/shared/app_style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_shop/views/shared/new_shoes.dart';
 import 'package:flutter_shop/views/shared/product_card.dart';
+
+import '../shared/home_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,9 +21,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
 
-  late Future<List<Sneakers>> _male, _female, _kids;
-  // late Future<List<Sneakers>> _female;
-  // late Future<List<Sneakers>> _kids;
+  late Future<List<Sneakers>> _male;
+  late Future<List<Sneakers>> _female;
+  late Future<List<Sneakers>> _kids;
 
   void getMale() {
     _male = Helper().getMaleSneakers();
@@ -105,89 +110,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Column(children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.405,
-                        child: ListView.builder(
-                            itemCount: 6,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return ProductCard(
-                                  price: "\$  200",
-                                  category: "Men Shoes",
-                                  id: "1",
-                                  name: "Adidas",
-                                  image:
-                                      "https://img.freepik.com/free-photo/pair-trainers_144627-3800.jpg?size=626&ext=jpg&ga=GA1.2.525198010.1685275747&semt=sph");
-                            }),
-                      ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Latest Shoes",
-                                  style: appstyle(
-                                      24, Colors.black, FontWeight.bold),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Show All",
-                                      style: appstyle(
-                                          22, Colors.black, FontWeight.w500),
-                                    ),
-                                    const Icon(Icons.arrow_right_sharp,
-                                        size: 40)
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.13,
-                              child: FutureBuilder<List<Sneakers>>(
-                                  future: _male,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return CircularProgressIndicator();
-                                    } else if (snapshot.hasError) {
-                                      return Text("Error ${snapshot.error}");
-                                    } else {
-                                      final male = snapshot.data;
-                                      return ListView.builder(
-                                          itemCount: male!.length,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            final shoe = snapshot.data![index];
-                                            return ProductCard(
-                                                price: shoe.price,
-                                                category: shoe.category,
-                                                id: shoe.id,
-                                                name: shoe.name,
-                                                image: shoe.imageUrl[0]);
-                                          });
-                                    }
-                                  }))
-                        ],
-                      ),
-                    ]),
-                    Column(children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.405,
-                        color: Colors.amber,
-                      ),
-                    ]),
-                    Column(children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.405,
-                        color: Colors.amber,
-                      ),
-                    ]),
+                    HomeWidget(male: _male),
+                    HomeWidget(male: _female),
+                    HomeWidget(male: _kids),
                   ],
                 ),
               ),
