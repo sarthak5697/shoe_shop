@@ -33,7 +33,7 @@ class _ProductCardState extends State<ProductCard> {
         ),
         child: Container(
           height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width*0.6,
+          width: MediaQuery.of(context).size.width*0.55,
           decoration: const BoxDecoration(boxShadow: [
             BoxShadow(
                 color: Colors.white,
@@ -47,7 +47,7 @@ class _ProductCardState extends State<ProductCard> {
               Stack(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.23,
+                    height: MediaQuery.of(context).size.height * 0.20,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(widget.image),
@@ -72,7 +72,7 @@ class _ProductCardState extends State<ProductCard> {
                     Text(
                       widget.name,
                       style: appstyleWithHt(
-                          36, Colors.black, FontWeight.bold, 1.1),
+                          30, Colors.black, FontWeight.bold, 1.1),
                     ),
                     Text(
                       widget.category,
@@ -89,7 +89,7 @@ class _ProductCardState extends State<ProductCard> {
                   children: [
                     Text(
                       widget.price,
-                      style: appstyle(30, Colors.black, FontWeight.w600),
+                      style: appstyle(25, Colors.black, FontWeight.w600),
                     ),
                     Row(
                       children: [
