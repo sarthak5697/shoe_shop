@@ -97,7 +97,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           Tab(
                             text: "Kids Shoes",
                           ),
-                        ]),
+                        ]
+                        ),
                   ],
                 ),
               ),

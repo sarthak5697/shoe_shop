@@ -22,6 +22,10 @@ dependencies:
   community_material_icon: ^5.9.55
   provider: ^6.0.5
   cached_network_image: ^3.2.3
+  ant_design_flutter: ^0.0.1+5
+  antdesign_icons: ^0.0.3
+  awesome_icons: ^1.1.0
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:
