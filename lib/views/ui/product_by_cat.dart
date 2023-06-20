@@ -18,10 +18,10 @@ class _ProductByCatState extends State<ProductByCat> {
             padding: const EdgeInsets.fromLTRB(16, 45, 0, 0),
             height: MediaQuery.of(context).size.height * 0.4,
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/"),
-                fit:BoxFit.fill,
-              ),
+              // image: DecorationImage(
+              //   image: AssetImage("assets/images/"),
+              //   fit:BoxFit.fill,
+              // ),
             ),
           ),
         ],

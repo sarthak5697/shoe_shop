@@ -84,7 +84,7 @@ class HomeWidget extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: NewShoes(
-                            imageUrl: shoe.imageUrl[1],
+                            imageUrl: shoe.imageUrl[0],
                           ),
                         );
                       });
