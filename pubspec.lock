@@ -211,6 +211,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.4"
+  grid_staggered_lite:
+    dependency: "direct main"
+    description:
+      name: grid_staggered_lite
+      sha256: "234901d012b80f79ed29c383a413b4d8cb1f2b126b76a3b6bc96afed12139518"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   http:
     dependency: transitive
     description:

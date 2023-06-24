@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/models/sneakersModel.dart';
 import 'package:flutter_shop/services/helper.dart';
 import 'package:flutter_shop/views/shared/app_style.dart';
-import 'package:flutter_shop/views/shared/product_card.dart';
 import 'package:flutter_shop/views/shared/stagger_tile.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grid_staggered_lite/grid_staggered_lite.dart';
 
 class ProductByCat extends StatefulWidget {
   const ProductByCat({super.key});
@@ -90,87 +89,87 @@ class _ProductByCatState extends State<ProductByCat>
                     ),
                   ),
                   TabBar(
-                      padding: EdgeInsets.zero,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorColor: Colors.transparent,
-                      controller: _tabController,
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      labelStyle: appstyle(24, Colors.white, FontWeight.bold),
-                      unselectedLabelColor: Colors.grey.withOpacity(0.3),
-                      tabs: const [
-                        Tab(
-                          text: "Mens Shoes",
-                        ),
-                        Tab(
-                          text: "Womens Shoes",
-                        ),
-                        Tab(
-                          text: "Kids Shoes",
-                        ),
-                      ]),
+                    padding: EdgeInsets.zero,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Colors.transparent,
+                    controller: _tabController,
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    labelStyle: appstyle(24, Colors.white, FontWeight.bold),
+                    unselectedLabelColor: Colors.grey.withOpacity(0.3),
+                    tabs: const [
+                      Tab(
+                        text: "Mens Shoes",
+                      ),
+                      Tab(
+                        text: "Womens Shoes",
+                      ),
+                      Tab(
+                        text: "Kids Shoes",
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.2,
+                top: MediaQuery.of(context).size.height * 0.175,
                 left: 16,
                 right: 12,
               ),
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  FutureBuilder<List<Sneakers>>(
-                    future: _male,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text("Error ${snapshot.error}");
-                      } else {
-                        final male = snapshot.data;
-                        return StaggeredGridView.countBuilder(
-                            padding: EdgeInsets.zero,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 16,
-                            itemCount: male!.length,
-                            scrollDirection: Axis.vertical,
-                            staggeredTileBuilder: (index) =>
-                                StaggeredTile.extent(
-                                    (index % 2 == 0) ? 1 : 1,
-                                    (index % 4 == 1 || index % 4 == 3)
-                                        ? MediaQuery.of(context).size.height *
-                                            0.35
-                                        : MediaQuery.of(context).size.height *
-                                            0.3),
-                            itemBuilder: (context, index) {
-                              final shoe = snapshot.data![index];
-                              return StaggerTile(
-                                  imageUrl: shoe.imageUrl[1],
-                                  name: shoe.name,
-                                  price: shoe.price);
-                            });
-                      }
-                    },
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 500,
-                    width: 300,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 500,
-                    width: 300,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 500,
-                    width: 300,
-                  ),
-                ],
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    FutureBuilder<List<Sneakers>>(
+                      future: _male,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text("Error ${snapshot.error}");
+                        } else {
+                          final male = snapshot.data;
+                          return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 16,
+                              itemCount: male!.length,
+                              scrollDirection: Axis.vertical,
+                              staggeredTileBuilder: (index) =>
+                                  StaggeredTile.extent(
+                                      (index % 2 == 0) ? 1 : 1,
+                                      (index % 4 == 1 || index % 4 == 3)
+                                          ? MediaQuery.of(context).size.height *
+                                              0.35
+                                          : MediaQuery.of(context).size.height *
+                                              0.3),
+                              itemBuilder: (context, index) {
+                                final shoe = snapshot.data![index];
+                                return StaggerTile(
+                                    imageUrl: shoe.imageUrl[0],
+                                    name: shoe.name,
+                                    price: "\$${shoe.price}");
+                              });
+                        }
+                      },
+                    ),
+                    Container(
+                      color: Colors.green,
+                      height: 500,
+                      width: 300,
+                    ),
+                    Container(
+                      color: Colors.green,
+                      height: 500,
+                      width: 300,
+                    ),
+                  
+                  ],
+                ),
               ),
             ),
           ],
